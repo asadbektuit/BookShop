@@ -19,7 +19,7 @@ import java.util.Date;
 public class Bookdto {
 
     private Integer id;
-    @NotBlank(message = "Iltimos Muallifni Kiriting")
+    @NotBlank(message = "Iltimos Muallifni kiriting")
     @Size(min = 2,max = 50)
     private String author;
     @NotBlank(message = "Iltimos Sarlavhani kiriting")

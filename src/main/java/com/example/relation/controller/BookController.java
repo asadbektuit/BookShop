@@ -27,7 +27,7 @@ public class BookController {
         return ResponseEntity.ok(result);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable ("id") Integer id,@RequestBody BookDto bookDto){
+    public ResponseEntity<?> update(@PathVariable ("id") Integer id,@RequestBody @Valid BookDto bookDto){
         BookDto result = bookService.update(id,bookDto);
         return ResponseEntity.ok(result);
     }

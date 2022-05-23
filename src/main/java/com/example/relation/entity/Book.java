@@ -4,9 +4,7 @@ package com.example.relation.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -14,10 +12,11 @@ import java.util.Date;
 @Setter
 
 @Entity
-@Table(name = "books")
+@Table(name = ("books"))
 public class Book {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String author;

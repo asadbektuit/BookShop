@@ -25,9 +25,10 @@ public class Book {
 
     private Double price;
 
-    private String book_image;
+    @Column(name = ("book_image"))
+    private String bookImage;
 
-    @Column(name = "published_date")
+    @Column(name = ("published_date"))
     private Date publishedDate;
 
     @Column(name = ("created_at"))

@@ -4,6 +4,7 @@ package com.example.relation.service;
 import com.example.relation.dto.BookDto;
 import com.example.relation.entity.Book;
 import com.example.relation.repository.BookRepository;
+import com.example.relation.util.BadRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class BookService {
     private Book getEntity(Integer id) {
         Optional<Book> optional =bookRepository.findByIdAndDeletedAtIsNull(id);
         if (optional.isEmpty()) {
-            throw new IllegalArgumentException("Book don't found");
+            throw new BadRequest("Book don't found");
         }
         return optional.get();
     }

@@ -12,8 +12,6 @@ import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookDto {
-
-
     private Integer id;
     @NotBlank(message = "Iltimos muallifni kiriting")
     @Size(min = 2,max = 50)

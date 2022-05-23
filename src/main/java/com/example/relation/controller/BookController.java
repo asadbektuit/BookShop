@@ -33,7 +33,7 @@ public class BookController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable ("id")Integer id){
-        BookDto result = bookService.delete(id);
+        Boolean result = bookService.delete(id);
         return ResponseEntity.ok(result);
     }
 

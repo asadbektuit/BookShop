@@ -46,7 +46,7 @@ public class BookService {
         return bookDto;
     }
 
-    public BookDto update(Integer id, BookDto bookDto) {
+    public boolean update(Integer id, BookDto bookDto) {
         Book update = getEntity(id);
         update.setAuthor(bookDto.getAuthor());
         update.setTitle(bookDto.getTitle());
@@ -54,10 +54,10 @@ public class BookService {
         update.setPrice(bookDto.getPrice());
         update.setUpdatedAt(bookDto.getUpdatedAt());
         bookRepository.save(update);
-        return bookDto;
+        return true;
     }
 
-    public Boolean delete(Integer id) {
+    public boolean delete(Integer id) {
         Book book = getEntity(id);
         book.setDeletedAt(LocalDateTime.now());
         bookRepository.save(book);

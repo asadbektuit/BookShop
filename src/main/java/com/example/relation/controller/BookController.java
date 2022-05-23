@@ -28,12 +28,12 @@ public class BookController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable ("id") Integer id,@RequestBody @Valid BookDto bookDto){
-        BookDto result = bookService.update(id,bookDto);
+        boolean result = bookService.update(id,bookDto);
         return ResponseEntity.ok(result);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable ("id")Integer id){
-        Boolean result = bookService.delete(id);
+        boolean result = bookService.delete(id);
         return ResponseEntity.ok(result);
     }
 

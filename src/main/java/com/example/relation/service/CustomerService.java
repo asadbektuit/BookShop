@@ -3,7 +3,7 @@ package com.example.relation.service;
 import com.example.relation.dto.CustomerDto;
 import com.example.relation.entity.Customer;
 import com.example.relation.repository.CustomerRepository;
-import com.example.relation.util.BadRequest;
+import com.example.relation.exception.BadRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

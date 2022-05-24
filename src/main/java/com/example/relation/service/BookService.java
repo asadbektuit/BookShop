@@ -22,27 +22,17 @@ public class BookService {
         Book book = getEntity(id);
         BookDto dto = new BookDto();
         dto.setAuthor(book.getAuthor());
-        dto.setTitle(book.getTitle());;
-        dto.setBookImage(book.getBookImage());
+        dto.setTitle(book.getTitle());
         dto.setPrice(book.getPrice());
         return dto;
-    }
-
-    private Book getEntity(Integer id) {
-        Optional<Book> optional =bookRepository.findByIdAndDeletedAtIsNull(id);
-        if (optional.isEmpty()) {
-            throw new BadRequest("Book don't found");
-        }
-        return optional.get();
     }
 
     public BookDto create(BookDto bookDto) {
         Book book = new Book();
         book.setAuthor(bookDto.getAuthor());
         book.setTitle(bookDto.getTitle());
-        book.setBookImage(bookDto.getBookImage());
         book.setPrice(bookDto.getPrice());
-        book.setCreatedAt(bookDto.getCreatedAt());
+        book.setCreatedAt(LocalDateTime.now());
         bookRepository.save(book);
         return bookDto;
     }
@@ -51,9 +41,8 @@ public class BookService {
         Book update = getEntity(id);
         update.setAuthor(bookDto.getAuthor());
         update.setTitle(bookDto.getTitle());
-        update.setBookImage(bookDto.getBookImage());
         update.setPrice(bookDto.getPrice());
-        update.setUpdatedAt(bookDto.getUpdatedAt());
+        update.setUpdatedAt(LocalDateTime.now());
         bookRepository.save(update);
         return true;
     }
@@ -63,5 +52,13 @@ public class BookService {
         book.setDeletedAt(LocalDateTime.now());
         bookRepository.save(book);
         return true;
+    }
+
+    public Book getEntity(Integer id) {
+        Optional<Book> optional =bookRepository.findByIdAndDeletedAtIsNull(id);
+        if (optional.isEmpty()) {
+            throw new BadRequest("Book don't found");
+        }
+        return optional.get();
     }
 }

@@ -28,13 +28,7 @@ public class CustomerService {
         return dto;
     }
 
-    private Customer getEntity(Integer id) {
-        Optional<Customer> optional = customerRepository.findByIdAndDeletedAtIsNull(id);
-        if (optional.isEmpty()) {
-            throw new BadRequest("Customer not found");
-        }
-        return optional.get();
-    }
+
 
     public CustomerDto create(CustomerDto dto) {
         Customer customer = new Customer();
@@ -49,15 +43,15 @@ public class CustomerService {
         return dto;
     }
 
-    public Boolean update(Integer id, Customer customer) {
+    public boolean update(Integer id, CustomerDto dto) {
         Customer update = getEntity(id);
-        update.setName(customer.getName());
-        update.setSurname(customer.getSurname());
-        update.setCity(customer.getCity());
-        update.setPassword(customer.getPassword());
-        update.setContact(customer.getContact());
-        update.setEmail(customer.getEmail());
-        update.setUpdatedAt(customer.getUpdatedAt());
+        update.setName(dto.getName());
+        update.setSurname(dto.getSurname());
+        update.setCity(dto.getCity());
+        update.setPassword(dto.getPassword());
+        update.setContact(dto.getContact());
+        update.setEmail(dto.getEmail());
+        update.setUpdatedAt(LocalDateTime.now());
         customerRepository.save(update);
         return true;
     }
@@ -67,5 +61,13 @@ public class CustomerService {
         customer.setDeletedAt(LocalDateTime.now());
         customerRepository.save(customer);
         return true;
+    }
+
+    private Customer getEntity(Integer id) {
+        Optional<Customer> optional = customerRepository.findByIdAndDeletedAtIsNull(id);
+        if (optional.isEmpty()) {
+            throw new BadRequest("Customer not found");
+        }
+        return optional.get();
     }
 }

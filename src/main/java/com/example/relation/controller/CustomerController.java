@@ -26,12 +26,12 @@ public class CustomerController {
         return ResponseEntity.ok(result);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody Customer customer) {
-        boolean result = customerService.update(id, customer);
+    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody @Valid CustomerDto dto) {
+        boolean result = customerService.update(id, dto);
         return ResponseEntity.ok(result);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable ("id")Integer id){
+    public ResponseEntity<?> delete(@PathVariable ("id") Integer id){
         boolean result = customerService.delete(id);
         return ResponseEntity.ok(result);
     }

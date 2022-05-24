@@ -19,12 +19,7 @@ public class CustomerService {
     public CustomerDto get(Integer id) {
         Customer customer = getEntity(id);
         CustomerDto dto = new CustomerDto();
-        dto.setName(customer.getName());
-        dto.setSurname(customer.getSurname());
-        dto.setCity(customer.getCity());
-        dto.setPassword(customer.getPassword());
-        dto.setContact(customer.getContact());
-        dto.setEmail(customer.getEmail());
+        convertEntityToDto(customer, dto);
         return dto;
     }
 
@@ -32,27 +27,18 @@ public class CustomerService {
 
     public CustomerDto create(CustomerDto dto) {
         Customer customer = new Customer();
-        customer.setName(dto.getName());
-        customer.setSurname(dto.getSurname());
-        customer.setCity(dto.getCity());
-        customer.setPassword(dto.getPassword());
-        customer.setContact(dto.getContact());
-        customer.setEmail(dto.getEmail());
+        convertDtoToEntity(customer,dto);
         customer.setCreatedAt(LocalDateTime.now());
         customerRepository.save(customer);
+        dto.setId(customer.getId());
         return dto;
     }
 
     public boolean update(Integer id, CustomerDto dto) {
-        Customer update = getEntity(id);
-        update.setName(dto.getName());
-        update.setSurname(dto.getSurname());
-        update.setCity(dto.getCity());
-        update.setPassword(dto.getPassword());
-        update.setContact(dto.getContact());
-        update.setEmail(dto.getEmail());
-        update.setUpdatedAt(LocalDateTime.now());
-        customerRepository.save(update);
+        Customer customer = getEntity(id);
+        convertDtoToEntity(customer, dto);
+        customer.setUpdatedAt(LocalDateTime.now());
+        customerRepository.save(customer);
         return true;
     }
 
@@ -62,6 +48,27 @@ public class CustomerService {
         customerRepository.save(customer);
         return true;
     }
+
+    public void convertEntityToDto(Customer customer, CustomerDto dto){
+        dto.setId(customer.getId());
+        dto.setName(customer.getName());
+        dto.setSurname(customer.getSurname());
+        dto.setCity(customer.getCity());
+        dto.setPassword(customer.getPassword());
+        dto.setContact(customer.getContact());
+        dto.setEmail(customer.getEmail());
+    }
+
+    public void convertDtoToEntity(Customer customer, CustomerDto dto){
+        customer.setName(dto.getName());
+        customer.setSurname(dto.getSurname());
+        customer.setCity(dto.getCity());
+        customer.setPassword(dto.getPassword());
+        customer.setContact(dto.getContact());
+        customer.setEmail(dto.getEmail());
+        customer.setUpdatedAt(LocalDateTime.now());
+    }
+
 
     private Customer getEntity(Integer id) {
         Optional<Customer> optional = customerRepository.findByIdAndDeletedAtIsNull(id);

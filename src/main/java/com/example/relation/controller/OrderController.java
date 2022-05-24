@@ -22,12 +22,19 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody @Valid OrderDto dto){
-        boolean result = orderService.create(dto);
+        OrderDto result = orderService.create(dto);
         return ResponseEntity.ok(result);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody @Valid OrderDto dto){
+        boolean result = orderService.update(id, dto);
+        return ResponseEntity.ok(result);
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id){
+        boolean result = orderService.delete(id);
+        return ResponseEntity.ok(result);
     }
 }

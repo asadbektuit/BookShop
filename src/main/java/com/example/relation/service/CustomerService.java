@@ -24,10 +24,9 @@ public class CustomerService {
     }
 
 
-
     public CustomerDto create(CustomerDto dto) {
         Customer customer = new Customer();
-        convertDtoToEntity(customer,dto);
+        convertDtoToEntity(customer, dto);
         customer.setCreatedAt(LocalDateTime.now());
         customerRepository.save(customer);
         dto.setId(customer.getId());
@@ -49,7 +48,7 @@ public class CustomerService {
         return true;
     }
 
-    public void convertEntityToDto(Customer customer, CustomerDto dto){
+    public void convertEntityToDto(Customer customer, CustomerDto dto) {
         dto.setId(customer.getId());
         dto.setName(customer.getName());
         dto.setSurname(customer.getSurname());
@@ -59,7 +58,7 @@ public class CustomerService {
         dto.setEmail(customer.getEmail());
     }
 
-    public void convertDtoToEntity(Customer customer, CustomerDto dto){
+    public void convertDtoToEntity(Customer customer, CustomerDto dto) {
         customer.setName(dto.getName());
         customer.setSurname(dto.getSurname());
         customer.setCity(dto.getCity());
@@ -70,7 +69,7 @@ public class CustomerService {
     }
 
 
-    private Customer getEntity(Integer id) {
+    public Customer getEntity(Integer id) {
         Optional<Customer> optional = customerRepository.findByIdAndDeletedAtIsNull(id);
         if (optional.isEmpty()) {
             throw new BadRequest("Customer not found");

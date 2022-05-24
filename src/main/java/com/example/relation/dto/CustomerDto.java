@@ -28,4 +28,5 @@ public class CustomerDto {
     private Integer email;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 }

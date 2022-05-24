@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -34,4 +35,13 @@ public class Order {
 
     @Column(name = ("total_price"))
     private Double totalPrice;
+
+    @Column(name = ("created_at"))
+    private LocalDateTime createdAt;
+
+    @Column(name = ("updated_at"))
+    private LocalDateTime updatedAt;
+
+    @Column(name = ("deleted_at"))
+    private LocalDateTime deletedAt;
 }

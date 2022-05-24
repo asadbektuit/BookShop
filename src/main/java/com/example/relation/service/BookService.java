@@ -19,9 +19,9 @@ public class BookService {
 
     public BookDto get(Integer id) {
         Book book = getEntity(id);
-        BookDto dto = new BookDto();
-        convertEntityToDto(book, dto);
-        return dto;
+        BookDto bookDto = new BookDto();
+        convertEntityToDto(book, bookDto);
+        return bookDto;
     }
 
     public BookDto create(BookDto bookDto) {

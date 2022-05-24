@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -18,10 +19,13 @@ public class OrderDto {
     @NotBlank(message = ("Invalid quantity"))
     @Size(min = 1, max = 100)
     private Integer quantity;
-    private Book book;
+    private BookDto book;
     private Integer bookId;
-    private Customer customer;
+    private CustomerDto customer;
     private Integer userId;
     @NotBlank(message = ("Invalid price"))
     private Double totalPrice;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 }

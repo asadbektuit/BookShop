@@ -30,6 +30,7 @@ public class BookService {
         book.setCreatedAt(LocalDateTime.now());
         convertDtoToEntity(book,bookDto);
         bookRepository.save(book);
+        bookDto.setId(book.getId());
         return bookDto;
     }
 
@@ -55,6 +56,7 @@ public class BookService {
     }
 
     public void convertEntityToDto(Book book, BookDto dto) {
+        dto.setId(book.getId());
         dto.setAuthor(book.getAuthor());
         dto.setTitle(book.getTitle());
         dto.setPrice(book.getPrice());
@@ -63,7 +65,7 @@ public class BookService {
     public Book getEntity(Integer id) {
         Optional<Book> optional = bookRepository.findByIdAndDeletedAtIsNull(id);
         if (optional.isEmpty()) {
-            throw new BadRequest("Book don't found");
+            throw new BadRequest("Book not found");
         }
         return optional.get();
     }
